@@ -27,32 +27,48 @@ public static void Menu(String namaPelanggan, boolean isMember, String kodePromo
     System.out.println("Silakan pilih menu yang Anda inginkan.");
 }
 
-public static int hitungTotalHarga (int pilihanMenu, int banyakItem, String kodePromo) {
+public static int hitungTotalSemua (int[] daftarMenu, int[] daftarJumlah, String kodePromo) {
     int [] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
-    int hargaTotal = hargaItems[pilihanMenu-1] * banyakItem;
+    int total = 0;
+
+   for (int i = 0; i < daftarMenu.length; i++) {
+        int harga = hargaItems [daftarMenu[i] - 1] * daftarJumlah [i];
+        total += harga;
+   }
     
     if (kodePromo.equals("DISKON50")) {
         System.out.println("Diskon 50% diterapkan"); 
-        hargaTotal = hargaTotal - (hargaTotal * 50/100);
+        total = total - (total * 50/100);
     } else if (kodePromo.equals("DISKON30")) {
         System.out.println("Diskon 30% diterapkan"); 
-        hargaTotal = hargaTotal - (hargaTotal * 50/100);
+        total = total - (total * 30/100);
     } else {
         System.out.println("Kode promo " +kodePromo +"Invaid, tidak ada diskon");
     }
 
-    return hargaTotal;
-    }
+    return total;
+}
 public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    Menu("Budi", true, "DISKON30");
-    System.out.print("\nMasukkan pilihan menu dan jumlah pesanan : ");
-    int pilihanMenu = input.nextInt();
-    System.out.print("Masukkan jumlah item yang ingin dipesan : ");
-    int banyakItem = input.nextInt();
+        Scanner input = new Scanner(System.in);
 
-    int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem, "DISKON30");
+        Menu("Budi", true, "DISKON30");
 
-    System.out.println("Total harga untuk pesanan anda adalah Rp." +totalHarga);
+        System.out.print("\nBerapa jenis menu yang ingin dipesan? ");
+        int jumlahJenis = input.nextInt();
+
+        int[] daftarMenu = new int[jumlahJenis];
+        int[] daftarJumlah = new int[jumlahJenis];
+
+        for (int i = 0; i < jumlahJenis; i++) {
+            System.out.print("Masukkan pilihan menu ke-" + (i + 1) + ": ");
+            daftarMenu[i] = input.nextInt();
+
+            System.out.print("Masukkan jumlah item menu ke-" + (i + 1) + ": ");
+            daftarJumlah[i] = input.nextInt();
+        }
+
+        int totalHarga = hitungTotalSemua(daftarMenu, daftarJumlah, "DISKON30");
+
+        System.out.println("\nTotal harga untuk pesanan anda adalah Rp." + totalHarga);
     }
 }
