@@ -27,10 +27,20 @@ public static void Menu(String namaPelanggan, boolean isMember, String kodePromo
     System.out.println("Silakan pilih menu yang Anda inginkan.");
 }
 
-public static int hitungTotalHarga02 (int pilihanMenu, int banyakItem) {
+public static int hitungTotalHarga (int pilihanMenu, int banyakItem, String kodePromo) {
     int [] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
-
     int hargaTotal = hargaItems[pilihanMenu-1] * banyakItem;
+    
+    if (kodePromo.equals("DISKON50")) {
+        System.out.println("Diskon 50% diterapkan"); 
+        hargaTotal = hargaTotal - (hargaTotal * 50/100);
+    } else if (kodePromo.equals("DISKON30")) {
+        System.out.println("Diskon 30% diterapkan"); 
+        hargaTotal = hargaTotal - (hargaTotal * 50/100);
+    } else {
+        System.out.println("Kode promo " +kodePromo +"Invaid, tidak ada diskon");
+    }
+
     return hargaTotal;
     }
 public static void main(String[] args) {
@@ -41,8 +51,8 @@ public static void main(String[] args) {
     System.out.print("Masukkan jumlah item yang ingin dipesan : ");
     int banyakItem = input.nextInt();
 
-    int totalHarga = hitungTotalHarga02(pilihanMenu, banyakItem);
+    int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem, "DISKON30");
 
     System.out.println("Total harga untuk pesanan anda adalah Rp." +totalHarga);
-}
+    }
 }
