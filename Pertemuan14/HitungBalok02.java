@@ -1,5 +1,6 @@
 package Pertemuan14;
 import java.util.Scanner;
+
 public class HitungBalok02 {
     public static int hitungLuas (int pjg, int lb) {
         int Luas = pjg * lb;
