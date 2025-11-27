@@ -2,7 +2,7 @@ package Pertemuan14;
 import java.util.Scanner;
 
 public class RekapPenjualanCafe02 {
-    static String[] menu = {"Kopi", "Teh", "Es Kelapa Muda", "Roti Bakar", "Gorengan"};
+    static String[] menu = {"Kopi       ", "Teh     ", "Es Kelapa Muda", "Roti Bakar", "Gorengan"};
 
     public static void inputData (int[][] penjualan, Scanner sc) {
         for (int i = 0; i < penjualan.length; i++) {
@@ -68,7 +68,20 @@ public class RekapPenjualanCafe02 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int[][] penjualan = new int[5][7];
+        System.out.print("Masukkan jumlah menu: ");
+        int jumlahMenu = sc.nextInt();
+        sc.nextLine();
+
+        menu = new String[jumlahMenu];
+        for (int i = 0; i < jumlahMenu; i++) {
+            System.out.print("Nama menu ke-" + (i + 1) + ": ");
+            menu[i] = sc.nextLine();
+        }
+
+        System.out.print("Masukkan jumlah hari penjualan: ");
+        int jumlahHari = sc.nextInt();
+
+        int[][] penjualan = new int[jumlahMenu][jumlahHari];
 
         inputData(penjualan, sc);
         tampilData(penjualan);
